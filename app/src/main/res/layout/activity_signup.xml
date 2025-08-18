@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="signup_container"
+    android:id="@+id/signup_container"
+    android:background="@drawable/img"
+    android:scrollbars="none"
+    tools:context=".SignupActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/card"
+        android:layout_gravity="center"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:contentPadding="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardPreventCornerOverlap="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:text="SignUp"
+                android:textAlignment="center"
+                android:textSize="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold|normal"/>
+
+            <EditText
+                android:id="@+id/firstname_input"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:hint="First Name"
+                android:textColorHint="@color/place_holder"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/lastname_input"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:hint="Last Name"
+                android:textColorHint="@color/place_holder"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/email_input"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:inputType="textEmailAddress"
+                android:hint="Email ID"
+                android:textColorHint="@color/place_holder"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/contact_input"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:inputType="number"
+                android:hint="Contact No."
+                android:textColorHint="@color/place_holder"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/parent_contact_input"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:inputType="number"
+                android:hint="Parent Contact No."
+                android:textColorHint="@color/place_holder"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Semester"
+                    android:textSize="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textAlignment="center" />
+                <Spinner
+                    android:id="@+id/semester_input"
+                    android:layout_width="120dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:contentDescription="Semester"
+                    android:isScrollContainer="true"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/signup_btn"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Signup"
+                android:background="@drawable/blur_rectangle"
+                android:backgroundTint="@color/signup_btn"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="or"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/gotologin_btn"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Login"
+                android:background="@drawable/blur_rectangle"
+                android:backgroundTint="@color/signup_btn"/>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</ScrollView>
