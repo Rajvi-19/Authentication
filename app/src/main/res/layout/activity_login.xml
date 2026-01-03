@@ -66,7 +66,7 @@
                 android:padding="6dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="Log IN"
+                android:text="LogIn"
                 android:background="@drawable/blur_rectangle"
                 android:backgroundTint="@color/signup_btn"/>
 
@@ -86,6 +86,18 @@
                 android:text="Signup"
                 android:background="@drawable/blur_rectangle"
                 android:backgroundTint="@color/signup_btn"/>
+
+            <Button
+                android:id="@+id/go_toAdmin"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:padding="6dp"
+                android:text="Admin"
+                android:background="@drawable/blur_rectangle"
+                android:backgroundTint="@color/signup_btn"/>
+
 
 
         </LinearLayout>

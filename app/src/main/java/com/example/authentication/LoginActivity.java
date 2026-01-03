@@ -1,22 +1,34 @@
 package com.example.authentication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button loginBtn, goToSignupBtn;
+    Button loginBtn, goToSignupBtn, goToAdmin;
 
     //CUSTOM TOAST
     Toast customToast;
+
+    String name, email;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +53,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         goToSignupBtn = findViewById(R.id.gotosignup_btn);
         goToSignupBtn.setOnClickListener(this);
 
+        goToAdmin = findViewById(R.id.go_toAdmin);
+        goToAdmin.setOnClickListener(this);
+
     }
 
     // FOR BTN CLICKED
@@ -55,22 +70,64 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
 
+        } else if (btnClicked == R.id.go_toAdmin) {
+            Intent intent = new Intent(this, AdminRequestPanelActivity.class);
+            startActivity(intent);
+
         } else {
 
-            // IF LOGIN BTN IS CLICKED
-            if (verifyDetails()) {
-                Toast.makeText(this, "Signed Up Successfully!!", Toast.LENGTH_SHORT).show();
+            EditText inputEmail = findViewById(R.id.login_email_input);
+            EditText inputPassword = findViewById(R.id.login_password_input);
 
-            } else {
-                Toast.makeText(this, "Sign Up Failed!!", Toast.LENGTH_SHORT).show();
-            }
+            String emailGot = inputEmail.getText().toString();
+            String passwordGot = inputPassword.getText().toString();
+
+            // IF LOGIN BTN IS CLICKED
+            verifyDetails(emailGot,passwordGot);
         }
 
     }
 
     // CHECKS IF DETAILS ARE CORRECT OR NOT
-    private boolean verifyDetails(){
-        return false;
+    private void verifyDetails(String email, String password){
+
+        // SEARCHING DATA THROUGH THE DATABASE
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("students");
+
+        Query query = ref.orderByChild("email").equalTo(email);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Email found
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String dbPassword = userSnapshot.child("password").getValue(String.class);
+                        Log.d("FirebaseLogin", "Password: " + password);
+
+                        if (dbPassword.equals(password)){
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class );
+                            startActivity(intent);
+                            break;
+                        }
+                        else{
+                            Toast.makeText(LoginActivity.this, "No Login", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    // Email not found
+                    Toast.makeText(getApplicationContext(), "Email does not exist", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LoginActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
