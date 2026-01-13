@@ -14,39 +14,16 @@
 
         <TextView
             android:id="@+id/RC_name"
-            android:layout_width="220dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="90dp"
             android:layout_marginTop="4dp"
             android:padding="5dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
+            android:text="Name"
+            android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"/>
-
-
-        <Button
-            android:id="@+id/user_accept"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="Accept"
-            android:textSize="17dp"
-            android:background="@drawable/round_corner"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_alignParentRight="true"/>
-
-        <Button
-            android:id="@+id/user_reject"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="Reject"
-            android:textSize="17dp"
-            android:background="@drawable/round_corner"
-            android:layout_marginRight="93dp"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            android:layout_alignParentRight="true"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

@@ -11,6 +11,8 @@ public class HelperClass {
     String dpJoinYear;
     Boolean requestAccepted;
 
+    String password;
+
     public HelperClass(String firstName, String lastName, String email, String contactNo, String parentContactNo, String dpJoinYear, Boolean requestAccepted) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,9 +23,20 @@ public class HelperClass {
         this.requestAccepted = requestAccepted;
     }
 
+    public  HelperClass(String password){
+        this.password = password;
+    }
+
     public HelperClass() {
     }
 
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
     public String getFirstName() {
         return firstName;
     }

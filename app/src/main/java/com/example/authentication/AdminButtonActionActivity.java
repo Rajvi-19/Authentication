@@ -47,7 +47,7 @@ public class AdminButtonActionActivity {
 
         //  SENDING DATA TO FORWARD THE MAIL
         boolean response = sendData(name, email);
-
+        Log.d("Response", String.valueOf(response));
         if (response){ //response
             addPasswordField();
             stateChangeRequestField();
@@ -57,7 +57,14 @@ public class AdminButtonActionActivity {
         }
     }
 
-    protected void RejectRequest(){
+    protected void RejectRequest(User userToRemove){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("students").child(userToRemove.getName());
+        reference.removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                Log.d("RejectRequest", "Completely Removed!!");
+            else
+                Log.d("RejectRequest", "Wasn't able to remove!!");
+        });
 
     }
 
@@ -71,7 +78,7 @@ public class AdminButtonActionActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    getValueOfReq[0] = snapshot.getValue(Boolean.class);
+                    getValueOfReq[0] = snapshot.child("request").getValue(Boolean.class);
 
                     if (!getValueOfReq[0]){
                         reference.child("request").setValue(true);
@@ -100,8 +107,8 @@ public class AdminButtonActionActivity {
             Log.d("Password", password);
 
             if (!password.isEmpty()) {
-
-                reference.child("password").setValue(password);
+                HelperClass setPassword = new HelperClass(password);
+                reference.child("password").setValue(setPassword.getPassword());
             } else {
                 Log.d("Firebase", "Password is empty, not adding!");
             }

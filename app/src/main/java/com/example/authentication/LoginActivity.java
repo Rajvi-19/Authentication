@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button loginBtn, goToSignupBtn, goToAdmin;
@@ -105,8 +107,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         String dbPassword = userSnapshot.child("password").getValue(String.class);
                         Log.d("FirebaseLogin", "Password: " + password);
+                        Log.d("EnteredFirebaseLogin", "Entered Password = " + dbPassword);
 
-                        if (dbPassword.equals(password)){
+                        if (dbPassword != null && dbPassword.equals(password)){
+
+                            Log.d("FirebaseLogin", "Hellooo");
+
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class );
                             startActivity(intent);
                             break;

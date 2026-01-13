@@ -1,6 +1,8 @@
 package com.example.authentication;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String name, email, contactNo, parentContactNo, joinYear;
 

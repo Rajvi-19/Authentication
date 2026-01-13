@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -52,7 +53,7 @@ public class AdminRequestPanelActivity extends AppCompatActivity {
                 for (DataSnapshot user: snapshot.getChildren()){
 
                     Boolean checkRequest = user.child("request").getValue(Boolean.class);
-                    if (!checkRequest){
+                    if (checkRequest == null || checkRequest == false) {
                         requestedForSignup.add(user);
                     }
                 }
@@ -69,7 +70,22 @@ public class AdminRequestPanelActivity extends AppCompatActivity {
 
             }
         });
+
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 && resultCode == RESULT_OK && data != null) {
+
+            int position = data.getIntExtra("position", -1);
+
+            if (position != -1 && adapter != null) {
+                adapter.removeItem(position);
+            }
+        }
+    }
+
 
     // *** REMEMBER: REMOVE USER FROM DB IF CLICKED DECLINE REQ BTN ***
     private void showRequests(){
